@@ -17,3 +17,4 @@ descriptor computation cost time: 0.00733
 *SOLUTION2:尝试了两种方法（见frame.h与frame.cpp上）都用
 !效果没用，实际上，我看一下TERMINAL下的输出，可能是地图点已经没有（逐次丢失）了，所以就结束程序了
     */
+//19812:测试GIT而添加了这行字
