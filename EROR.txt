@@ -1,0 +1,19 @@
+#EROR1:
+	lee@YRan1R:~/storehouse/svn/0.4$ bin/run_vo config/default.yaml
+bin/run_vo: error while loading shared libraries: libopencv_viz.so.3.1: cannot open shared object file: No such file or directory
+	*SOLUTION1:
+		lee@YRan1R:~$ export LD_LIBRARY_PATH=/home/lee/storehouse/svn/0.4/lib:$LD_LIBRARY_PATH
+lee@YRan1R:~$ echo $LD_LIBRARY_PATH
+/home/lee/storehouse/svn/0.4/lib:
+*SOLUTION1:
+  之前的试过横多方法，主要是装libopencv_viz.so.1，把我搞得头皮发麻，后来转念一想，这个是旧版的viz模块，应该在CMakeLists.txt中修改opencv的版本就可以了：
+	find_package( OpenCV 3.1 REQUIRED )
+	》
+	find_package( OpenCV 3.4 REQUIRED )
+#EROR2:****** loop 445 ******
+extract keypoints cost time: 0.00973
+descriptor computation cost time: 0.00733
+段错误 (核心已转储)
+*SOLUTION2:尝试了两种方法（见frame.h与frame.cpp上）都用
+!效果没用，实际上，我看一下TERMINAL下的输出，可能是地图点已经没有（逐次丢失）了，所以就结束程序了
+    */
