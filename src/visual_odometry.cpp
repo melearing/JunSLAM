@@ -49,7 +49,7 @@ VisualOdometry::~VisualOdometry()
 {
 
 }
-
+//有限状态机：初始化INITIALIZING、正常OK、丢失LOST
 bool VisualOdometry::addFrame ( Frame::Ptr frame )
 {
     switch ( state_ )
@@ -102,14 +102,14 @@ bool VisualOdometry::addFrame ( Frame::Ptr frame )
 
     return true;
 }
-
+//计算特征点
 void VisualOdometry::extractKeyPoints()
 {
     boost::timer timer;
     orb_->detect ( curr_->color_, keypoints_curr_ );
     cout<<"extract keypoints cost time: "<<timer.elapsed() <<endl;
 }
-
+//计算描述子：此处可改变为OpticalFlow
 void VisualOdometry::computeDescriptors()
 {
     boost::timer timer;

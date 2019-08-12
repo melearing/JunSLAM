@@ -10,7 +10,7 @@
 #include "myslam/visual_odometry.h"
 
 int main ( int argc, char** argv )
-{
+{   //读取数据集的基本操作
     if ( argc != 2 )
     {
         cout<<"usage: run_vo parameter_file"<<endl;
