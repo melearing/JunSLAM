@@ -102,21 +102,21 @@ bool VisualOdometry::addFrame ( Frame::Ptr frame )
 
     return true;
 }
-//计算特征点
+//计算特征点find mappoint:采用ORB法，相比与FAST具有方向性
 void VisualOdometry::extractKeyPoints()
 {
     boost::timer timer;
     orb_->detect ( curr_->color_, keypoints_curr_ );
     cout<<"extract keypoints cost time: "<<timer.elapsed() <<endl;
 }
-//计算描述子：此处可改变为OpticalFlow
+//计算描述子compute descriptors：此处可改变为OpticalFlow;若要这样做，必须搞清楚两者的变量的对应关系，必须“引用”
 void VisualOdometry::computeDescriptors()
 {
     boost::timer timer;
     orb_->compute ( curr_->color_, keypoints_curr_, descriptors_curr_ );
     cout<<"descriptor computation cost time: "<<timer.elapsed() <<endl;
 }
-
+//匹配match
 void VisualOdometry::featureMatching()
 {
     boost::timer timer;
@@ -136,7 +136,7 @@ void VisualOdometry::featureMatching()
             desp_map.push_back( p->descriptor_ );
         }
     }
-    
+    //匹配相邻帧match two images
     matcher_flann_.match ( desp_map, descriptors_curr_, matches );
     // select the best matches
     float min_dis = std::min_element (
